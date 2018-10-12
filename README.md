@@ -184,7 +184,7 @@ This results in the following log events being output:
   "logger": "my-logger",
   "message": "We have some...",
   "origin": {
-    "application": "my-app"
+    "application": "my-app",
     "environment": "production",
     "region": "us-west-1"
   },
@@ -230,7 +230,7 @@ Which results in the following being output:
   "logger": "my-logger",
   "message": "We have some...",
   "origin": {
-    "application": "my-app"
+    "application": "my-app",
     "environment": "production",
     "region": "us-west-1"
   },
@@ -286,7 +286,7 @@ Which results in the following being output:
     "environment": "production",
     "region": "us-west-1"
   },
-  error: {
+  "error": {
     "type": "Error",
     "details": "Ooops",
     "backtrace": [
