@@ -1,3 +1,4 @@
+// vim: filetype=javascript.nodejs.mocha-chai
 const expect = require('chai').expect;
 
 describe("LogJammer", () => {
