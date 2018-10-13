@@ -262,9 +262,9 @@ allows you to log excessively at a `debug` level, but not incur the cost
 of collecting the data if your `LOG_LEVEL` is set to `INFO`.
 
 ## Error Structured Data
-The `warn`, `error` and `fatal` log methods can also accept a third nodejs
-`Error` object.  When given to the log method, this results in an `error`
-field being populated within the log event.  To see this at work:
+The log methods can also accept a third nodejs `Error` object.  When given to
+the log method, this results in an `error` field being populated within the log
+event.  To see this at work:
 
 ```js
 try {

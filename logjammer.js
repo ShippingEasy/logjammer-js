@@ -25,6 +25,7 @@ LogJammer.config = {
   origin: {},
   globalData: {},
   pretty: false,
+  device: console,
   publisher: {
     publish: (logEvent, pretty=false) => {
       var json;
@@ -35,7 +36,7 @@ LogJammer.config = {
         json = JSON.stringify(logEvent);
       }
 
-      console.log(json);
+      LogJammer.config.device.log(json);
     }
   }
 };
@@ -72,23 +73,25 @@ LogJammer.logger = (name) => {
         };
       }
 
+      data = data ? data : defaultData;
+
       logEvent[LogJammer.config.application] = Object.assign(data(), LogJammer.config.globalData);
 
       return logEvent;
     }
   };
 
-  thisLogger.debug = (msg, data=defaultData) => {
+  thisLogger.debug = (msg, data=defaultData, err) => {
     if (thisLogger.logLevel <= LogJammer.Severity.DEBUG) {
-      var logEvent = thisLogger.__buildEvent('debug', msg, data);
+      var logEvent = thisLogger.__buildEvent('debug', msg, data, err);
 
       thisLogger.publisher.publish(logEvent, thisLogger.pretty);
     }
   };
 
-  thisLogger.info = (msg, data=defaultData) => {
+  thisLogger.info = (msg, data=defaultData, err) => {
     if (thisLogger.logLevel <= LogJammer.Severity.INFO) {
-      var logEvent = thisLogger.__buildEvent('info', msg, data);
+      var logEvent = thisLogger.__buildEvent('info', msg, data, err);
 
       thisLogger.publisher.publish(logEvent, thisLogger.pretty);
     }
@@ -118,9 +121,9 @@ LogJammer.logger = (name) => {
     }
   };
 
-  thisLogger.unknown = (msg, data=defaultData) => {
+  thisLogger.unknown = (msg, data=defaultData, err) => {
     if (thisLogger.logLevel <= LogJammer.Severity.UNKNOWN) {
-      var logEvent = thisLogger.__buildEvent('unknown', msg, data);
+      var logEvent = thisLogger.__buildEvent('unknown', msg, data, err);
 
       thisLogger.publisher.publish(logEvent, thisLogger.pretty);
     }
